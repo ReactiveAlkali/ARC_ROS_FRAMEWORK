@@ -1,0 +1,6 @@
+devel_space: /home/mute/workspace/arc_ws/src/arc_ros/arc_core/devel
+install: false
+install_space: /home/mute/workspace/arc_ws/src/arc_ros/arc_core/install
+profile: default
+source_space: /home/mute/workspace/arc_ws/src/arc_ros/arc_core/src
+workspace: /home/mute/workspace/arc_ws/src/arc_ros/arc_core

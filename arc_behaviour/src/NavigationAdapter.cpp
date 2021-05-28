@@ -3,6 +3,8 @@
 #include "arc_msgs/NavigationRequest.h"
 #include "std_srvs/Empty.h"
 
+#define MAX_QUEUE_SIZE 1000 //max number of messages to keep on queue before flushing
+
 using namespace arc_behaviour;
 bool NavigationAdapter::is_stuck_cb(std_srvs::Trigger::Request &req, std_srvs::Trigger::Response &res) {
     return this->is_stuck;
@@ -31,6 +33,21 @@ NavigationAdapter::NavigationAdapter() {
 
     ROS_INFO("Found move_base action server!");
     this->current_nav_priority = 0;
+
+
+
+    //==========================================
+    //
+    //
+    //
+    //==========================================
+    
+    // ros::Timer timer = global_handle.createTimer(ros::Duration(30), &NavigationAdapter::timer_cb, this, false);
+    // this->stuck_timer = timer;
+
+    // this->guided_debris_pub = global_handle.advertise<arc_msgs::Debris>("debris_request", MAX_QUEUE_SIZE);
+
+    
 }
 
 bool NavigationAdapter::abort_goals_cb(std_srvs::Trigger::Request &req, std_srvs::Trigger::Response &res) {
@@ -111,7 +128,11 @@ void NavigationAdapter::run() {
     while(ros::ok()) {
         if(this->is_stuck) {
             ROS_INFO("ROBOT IS STUCK");
+	    this->stuck_timer.start();
         }
+	else{
+	  this->stuck_timer.stop();
+	}
         ros::spinOnce();
         r.sleep();
     }
@@ -140,3 +161,14 @@ bool NavigationAdapter::isIs_stuck() const {
 void NavigationAdapter::setIs_stuck(bool is_stuck) {
     NavigationAdapter::is_stuck = is_stuck;
 }
+
+
+//=============================================
+//
+//
+//
+//=============================================
+
+//void NavigationAdapter::Timer_cb(const ros::TimerEvent &event){
+  //will send off the request
+//}

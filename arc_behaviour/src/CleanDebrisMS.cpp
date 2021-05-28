@@ -82,7 +82,7 @@ void CleanDebrisMS::process_debris_cb(const arc_msgs::DetectedDebris debris) {
             }
 
 
-            std::vector<int> to_delete; //The debris we wish to remove (ie it now out of range.)
+  std::vector<int> to_delete; //The debris we wish to remove (ie it now out of range.)
             //go through all debris it currently knows of. Which ones are out of range? We will forget about them.
             for (std::map<int, int>::iterator it = this->debris_found.begin(); it != debris_found.end(); it++) {
                 int key = it->first;

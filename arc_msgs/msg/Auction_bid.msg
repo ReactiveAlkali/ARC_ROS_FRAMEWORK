@@ -1,0 +1,2 @@
+string bot_name
+float32 bid_amount

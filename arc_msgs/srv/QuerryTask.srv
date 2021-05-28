@@ -1,0 +1,7 @@
+---
+int32 task_type
+int32 priority
+float64 bot_x
+float64 bot_y
+float64 loc_x
+float64 loc_y

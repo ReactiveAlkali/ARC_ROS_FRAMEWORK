@@ -1,0 +1,18 @@
+
+
+#ifndef ARC_BEHAVIOUR_BRAIN_H
+#define ARC_BEHAVIOUR_BRAIN_H
+#include "ros/ros.h"
+#include "arc_msgs/"
+
+
+
+namespace arc_behaviour {
+  class Brain{
+  private:
+    ros::NodeHandle global_handle;
+    ros::NodeHandle local_handle;
+
+    ros::
+  };
+}

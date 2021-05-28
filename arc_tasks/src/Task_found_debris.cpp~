@@ -1,0 +1,44 @@
+
+#include <std_srvs/Trigger.h>
+#include "Task_found_debris.h"
+#include "std_srvs/SetBool.h"
+#include "ros/ros.h"
+#include <ros/ros.h>
+
+
+
+
+using namespace arc_tasks;
+
+Task_found_debris::Task_found_debris(){
+  ros::NodeHandle global_handle;
+  ros::NodeHandle local_hanlde("task_found_debris");
+
+  this->global_handle = global_handle;
+  this->local_handle = local_handle;
+
+  ROS_INFO("Setting up the found debris task");
+
+
+}
+
+
+Task_found_debris::toggle(bool state){
+
+}
+
+Task_found_debris::toggle_cb(std_srvs::SetBoolRequest &req, std_srvs::SetBoolRequest &res){
+  this->toggle(req.data);
+  return true;
+}
+
+Task_found_debris::send_debris_cb(){
+
+
+}
+
+Task_found_debris::sub_debris_list_cb(){
+
+
+}
+

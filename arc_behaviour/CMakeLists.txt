@@ -209,6 +209,9 @@ add_executable(random_wander_ms src/RandomWanderMS.cpp src/RandomWanderMS.h src/
 add_executable(move_to_goal_ms src/MoveToGoalMS.cpp src/MoveToGoalMS.h src/move_to_goal_ms_node.cpp src/MotorSchema.h)
 add_executable(clean_debris_ms src/CleanDebrisMS.cpp src/CleanDebrisMS.h src/clean_debris_ms_node.cpp src/MotorSchema.h)
 add_executable(handle_marker_ms src/HandleMarkerMS.cpp src/HandleMarkerMS.h src/handle_marker_ms_node.cpp src/MotorSchema.h)
+add_executable(bot_brain src/Bot_Brain.cpp src/Bot_Brain.h src/bot_brain_node.cpp)
+
+
 
 target_link_libraries(detect_victim_ps ${catkin_LIBRARIES} )
 target_link_libraries(detect_marker_ps ${catkin_LIBRARIES} )
@@ -219,6 +222,8 @@ target_link_libraries(move_to_goal_ms ${catkin_LIBRARIES} )
 target_link_libraries(clean_debris_ms ${catkin_LIBRARIES} )
 target_link_libraries(handle_marker_ms ${catkin_LIBRARIES} )
 target_link_libraries(navigation_adapter ${catkin_LIBRARIES} )
+target_link_libraries(bot_brain ${catkin_LIBRARIES})
+
 
 add_dependencies(detect_debris_ps marker_msgs_generate_messages_cpp arc_msgs_generate_messages_cpp)
 add_dependencies(detect_victim_ps marker_msgs_generate_messages_cpp arc_msgs_generate_messages_cpp)
@@ -228,3 +233,4 @@ add_dependencies(move_to_goal_ms marker_msgs_generate_messages_cpp arc_msgs_gene
 add_dependencies(clean_debris_ms marker_msgs_generate_messages_cpp arc_msgs_generate_messages_cpp)
 add_dependencies(handle_marker_ms marker_msgs_generate_messages_cpp arc_msgs_generate_messages_cpp)
 add_dependencies(navigation_adapter arc_msgs_generate_messages_cpp)
+add_dependencies(bot_brain marker_msgs_generate_messages_cpp arc_msgs_generate_messages_cpp)

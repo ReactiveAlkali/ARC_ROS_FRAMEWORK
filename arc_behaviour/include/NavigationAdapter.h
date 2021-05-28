@@ -28,6 +28,18 @@ namespace arc_behaviour {
 
         ros::NodeHandle local_handle;
 
+	//=======================================================================
+	//
+	// Stuarts addition to send off a help message after getting stuck
+	//
+	//=======================================================================
+
+	ros::Timer stuck_timer;
+
+	ros::Publisher guided_debris_pub;
+
+	
+
         /*
          * Any requests to move to some location will be checked here before calling upon navigation stack.
          */
@@ -105,6 +117,16 @@ namespace arc_behaviour {
 
         //run the main loop of node.
         void run();
+
+	//=============================================
+	//
+	//
+	//
+	//=============================================
+
+	void timer_cb(const ros::TimerEvent &event);
+
+	bool stuck_cd();
     };
 }
 

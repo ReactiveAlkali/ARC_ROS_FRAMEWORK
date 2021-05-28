@@ -1,0 +1,43 @@
+/**
+* CLASS: Goals_stuart
+* DATE: 15/06/2020
+* AUTHOR: Stuart Campbell
+* DESCRIPTION: Stores the role types and all of the data associated with it
+*/
+#ifndef ARC_BEHAVIOUR_ROBOTROLES_H
+#define ARC_BEHAVIOUR_ROBOTROLES_H
+
+#include <nav_msgs/Odometry.h>
+#include "ros/ros.h"
+#include "arc_msgs/NavigationRequest.h"
+#include "MotorSchema.h"
+#include "std_srvs/SetBool.h"
+
+namespace arc_behaviour {
+    class Robot_Roles{
+    private:
+        int priority;
+	int max_count;
+	int curr_count;
+	std::struct Role_matrix{
+	  float compute;
+	  float memory;
+	  float locomotion;
+	  float size;
+	  float victim_sensor_basic;
+	  float victim_sensor_full;
+	  float victim_tracker;
+	  float robot_sensor;
+	  float sonar_count;
+	  float sonar_range;
+	  float laser_count;
+	  float frontier_finder;
+	  float task_assign;
+	  float planner;
+	  float value;
+	  float expendability;
+	  float marker;
+	  float marker_sensor;
+	}
+}
+#endif //ARC_BEHAVIOUR_ROBOTROLES_H

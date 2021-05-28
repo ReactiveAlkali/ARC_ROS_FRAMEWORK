@@ -1,5 +1,5 @@
 <!--TESTING INSTRUCTIONS-->
-<!--activate robot: "rosservice call /arc/test_bot/random_wander_ms/toggle "data: true" -->
+<!--activate robot: "rosservice call /arc/test_bot/bot_brain/toggle "data: true" -->
 
 <!-- arguments: robot_type: specify type of robot. default is maxbot
 Other options: midbot, smallbot, explorer

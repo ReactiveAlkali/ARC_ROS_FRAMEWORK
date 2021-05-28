@@ -5,6 +5,7 @@
 #include "arc_msgs/Debris.h"
 #include "marker_msgs/MarkerDetection.h"
 #include "std_msgs/Bool.h"
+#include <vector>
 
 #define DEFAULT_MAX_RANGE 10
 #define MAX_QUEUE_SIZE 1000
@@ -26,6 +27,10 @@ DetectDebrisPS::DetectDebrisPS() {
     int max_range;
     local_handle.getParam("max_range", max_range);
     this->setMaxRange(max_range);
+
+
+
+    
 }
 
 void DetectDebrisPS::process_detect_debris_cb(const marker_msgs::MarkerDetection marker_info) {
@@ -81,6 +86,10 @@ void DetectDebrisPS::ProcessStageFiducial() {
             if(it->ids.size()>0) {
                 curr_debris.debris_id = it->ids.at(0);
                 pruned.debris.insert(pruned.debris.begin(),curr_debris);
+        
+       
+		
+
             }
 
         }
@@ -90,3 +99,5 @@ void DetectDebrisPS::ProcessStageFiducial() {
     this->debris_list = pruned;
     ROS_DEBUG("Found %d markers within range.", pruned.debris.size());
 }
+
+
