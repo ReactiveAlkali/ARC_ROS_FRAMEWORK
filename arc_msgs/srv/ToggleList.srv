@@ -1,0 +1,5 @@
+bool random_wander
+bool move_to_goal
+bool clean_debris
+bool detect_debris
+---

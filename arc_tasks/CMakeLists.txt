@@ -139,14 +139,9 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(task_explore_server src/task_explore_server_node.cpp src/TaskExploreServer.cpp src/TaskExploreServer.h src/TaskServer.cpp src/TaskServer.h)
-add_executable(task_explore_client src/task_explore_client_node.cpp src/TaskExploreClient.cpp src/TaskExploreClient.h src/TaskUnguidedCleanDebrisClient.cpp src/TaskUnguidedCleanDebrisClient.h)
-add_executable(task_unguided_clean_debris_server src/task_unguided_clean_debris_server_node.cpp src/TaskUnguidedCleanDebrisServer.cpp src/TaskUnguidedCleanDebrisServer.h src/TaskServer.cpp src/TaskServer.h)
-add_executable(task_unguided_clean_debris_client src/task_unguided_clean_debris_client_node.cpp src/TaskUnguidedCleanDebrisClient.cpp src/TaskUnguidedCleanDebrisClient.h)
-add_executable(task_guided_clean_debris_client src/task_guided_clean_debris_client_node.cpp src/TaskGuidedCleanDebrisClient.cpp src/TaskGuidedCleanDebrisClient.h)
-add_executable(task_guided_clean_debris_server src/task_guided_clean_debris_server_node.cpp src/TaskGuidedCleanDebrisServer.cpp src/TaskGuidedCleanDebrisServer.h src/TaskServer.cpp src/TaskServer.h)
-add_executable(task_confirm_victim_client src/task_confirm_victim_client_node.cpp src/TaskConfirmVictimClient.cpp src/TaskConfirmVictimClient.h src/task_confirm_victim_client_node.cpp)
-add_executable(task_confirm_victim_server src/TaskConfirmVictimServer.cpp src/TaskConfirmVictimServer.h src/TaskServer.cpp src/TaskServer.h src/task_confirm_victim_server_node.cpp)
+
+add_executable(task_center src/Task_center_node.cpp src/Task_center.cpp src/Task_center.h)
+add_executable(task_explore src/Task_explore_node.cpp src/Task_explore.cpp src/Task_explore.h)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -156,39 +151,17 @@ add_executable(task_confirm_victim_server src/TaskConfirmVictimServer.cpp src/Ta
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-add_dependencies(task_explore_server arc_msgs_generate_messages_cpp)
-add_dependencies(task_explore_client arc_msgs_generate_messages_cpp)
-add_dependencies(task_unguided_clean_debris_server arc_msgs_generate_messages_cpp)
-add_dependencies(task_unguided_clean_debris_client arc_msgs_generate_messages_cpp)
-add_dependencies(task_guided_clean_debris_server arc_msgs_generate_messages_cpp)
-add_dependencies(task_guided_clean_debris_client arc_msgs_generate_messages_cpp)
-add_dependencies(task_confirm_victim_client arc_msgs_generate_messages_cpp)
-add_dependencies(task_confirm_victim_server arc_msgs_generate_messages_cpp)
+
+add_dependencies(task_center arc_msgs_generate_messages_cpp)
+add_dependencies(task_explore arc_msgs_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(task_explore_server
-   ${catkin_LIBRARIES}
-)
 
-target_link_libraries(task_explore_client
+target_link_libraries(task_center
    ${catkin_LIBRARIES}
-)
-target_link_libraries(task_unguided_clean_debris_server
-   ${catkin_LIBRARIES}
-)
-target_link_libraries(task_unguided_clean_debris_client
-   ${catkin_LIBRARIES}
-)
-target_link_libraries(task_guided_clean_debris_server
-   ${catkin_LIBRARIES}
-)
-target_link_libraries(task_guided_clean_debris_client
-   ${catkin_LIBRARIES}
-)
-target_link_libraries(task_confirm_victim_client
-   ${catkin_LIBRARIES}
-)
-target_link_libraries(task_confirm_victim_server
+   )
+
+ target_link_libraries(task_explore
    ${catkin_LIBRARIES}
 )
 #############

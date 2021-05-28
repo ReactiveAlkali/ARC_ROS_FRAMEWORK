@@ -1,0 +1,50 @@
+
+#include "ros/ros.h"
+#include <ros/ros.h>
+
+
+
+#ifndef ARC_TASKS_TASK_FOUND_DEBRIS_H
+#define ARC_TASKS_TASK_FOUND_DEBRIS_H
+
+namespace arc_tasks{
+  class Task_found_debris{
+  private:
+
+    bool enabled;
+    
+    ros::NodeHandle global_handle;
+    ros::NodeHandle local_handle;
+
+    //subscriber to location of debris
+    ros::Subscriber debris_detector_sub;
+
+    //service timer to send off the debris
+    ros::serviceClient send_individual_debris;
+
+    ros::serviceServer toggle_server;
+
+    toggle(bool state);
+
+
+    //timer
+    ros::Timer send_debris_timer;
+  public:
+
+    toggle_cb();
+
+    Task_found_debris();
+
+    send_debris_cb();
+
+    sub_debris_list_cb();
+
+    timer_cb(const ros::TimerEvent &event);
+
+    run();
+
+    
+
+
+  }
+}

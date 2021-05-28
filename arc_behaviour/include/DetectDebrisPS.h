@@ -4,17 +4,23 @@
 * AUTHOR: Kyle Morris
 * DESCRIPTION: Determine if markers are near by.
 */
+#include <rosconsole/macros_generated.h>
+#include <ros/ros.h>
 
 #include "marker_msgs/MarkerDetection.h"
 #include "geometry_msgs/Pose.h"
 #include "arc_msgs/Debris.h"
 #include "arc_msgs/DetectedDebris.h"
+
 #ifndef ARC_BEHAVIOUR_DebrisDETECTORPS_H
 #define ARC_BEHAVIOUR_DebrisDETECTORPS_H
 
 namespace arc_behaviour {
 class DetectDebrisPS {
 private:
+
+
+     
     /**
      * Collection of the markers found in given perceptual instance.
      */
@@ -43,7 +49,12 @@ private:
     //callbacks
     //update us with most recent stage information
     void process_detect_debris_cb(const marker_msgs::MarkerDetection marker_info);
+
+
+    
 public:
+
+    
     /**
      * Setup the detector with all of the ros topic publishers.
      * @param handle : the node handle to setup with.
@@ -65,6 +76,9 @@ public:
      * Main loop. Publishes Debris status information.
      */
     void run();
+
+
+    
 };
 }
 

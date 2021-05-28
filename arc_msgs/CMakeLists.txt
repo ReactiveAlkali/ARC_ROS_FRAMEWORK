@@ -70,6 +70,10 @@ add_service_files(
    ToggleSchema.srv
    MoveAlterableObject.srv
    DropMarker.srv
+   QuerryRole.srv
+   QuerryTask.srv
+   Task.srv
+   ToggleList.srv
 )
 
 ## Generate actions in the 'action' folder

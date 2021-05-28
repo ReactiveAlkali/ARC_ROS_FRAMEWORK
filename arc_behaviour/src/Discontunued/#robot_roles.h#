@@ -1,0 +1,59 @@
+/**
+* CLASS: robot_roles
+* DATE: 15/06/2020
+* AUTHOR: Stuart Campbell
+* DESCRIPTION: Stores the role types and all of the data associated with it
+*/
+#ifndef ARC_BEHAVIOUR_ROBOTROLES_H
+#define ARC_BEHAVIOUR_ROBOTROLES_H
+
+#include <nav_msgs/Odometry.h>
+#include "ros/ros.h"
+#include "arc_msgs/NavigationRequest.h"
+#include "MotorSchema.h"
+#include "std_srvs/SetBool.h"
+
+namespace arc_behaviour {
+    class Robot_Roles{
+    private:
+        int priority;
+	int max_count;
+	int curr_count;
+	std::struct role_matrix{
+	  float compute=0;
+	  float memory=0;
+	  float locomotion=0;
+	  float size=0;
+	  float victim_sensor_basic=0;
+	  float victim_sensor_full=0;
+	  float victim_tracker=0;
+	  float robot_sensor=0;
+	  float sonar_count=0;
+	  float sonar_range=0;
+	  float laser_count=0;
+	  float frontier_finder=0;
+	  float task_assign=0;
+	  float planner=0;
+	  float value=0;
+	  float expendability=0;
+	  float marker=0;
+	  float marker_sensor=0;
+	}
+    	ros::NodeHandle global_handle;
+	ros::NodeHandle local_handle;
+
+	ros::Subscriber robot_team_sub;
+	ros::Publisher robot_role_pub;
+    public:
+
+	void set_max_count(int count):
+
+	void set_priority(int pri);
+
+	void set_curr_count(int curr);
+	
+	Robot_Roles(matrix *in_matrix);
+
+	void run();
+}
+#endif //ARC_BEHAVIOUR_ROBOTROLES_H

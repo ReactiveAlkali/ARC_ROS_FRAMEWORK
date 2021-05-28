@@ -1,0 +1,30 @@
+#include "ros/ros.h"
+#include <ros/ros.h>
+#include "arc_msgs/Task.h"
+#include "std_srvs/SetBool.h"
+
+#ifndef ARC_TASKS_TASK_COMS_HANDLE_H
+#define ARC_TASKS_TASK_COMS_HANDLE_H
+
+namespace arc_tasks{
+  class Task_coms_handle{
+  private:
+
+    //====================================
+    //
+    // Debris
+    //
+    //====================================
+
+
+
+    //====================================
+    //
+    // Robot
+    //
+    //====================================
+  public:
+    
+  }
+
+}

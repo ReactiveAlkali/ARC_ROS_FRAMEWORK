@@ -1,0 +1,1 @@
+/home/mute/workspace/arc_ws/src/arc_ros/arc_core/devel/.private/catkin_tools_prebuild/local_setup.zsh
