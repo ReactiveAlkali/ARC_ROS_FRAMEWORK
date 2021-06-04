@@ -1,6 +1,6 @@
 #include <std_srvs/Trigger.h>
 #include "Task_explore.h"
-#include "arc_msgs/Task.h"
+#include "arc_msgs/TaskService.h"
 #include "arc_msgs/ToggleList.h"
 #include "arc_msgs/QuerryTask.h"
 
@@ -23,7 +23,7 @@ Task_explore::Task_explore(){
   this->current_task = this->global_handle.serviceClient<arc_msgs::QuerryTask>("task_center/curr_task");
 
   //sends an explore task to the task center
-  this->send_task = this->global_handle.serviceClient<arc_msgs::Task>("task_center/in_task");
+  this->send_task = this->global_handle.serviceClient<arc_msgs::TaskService>("task_center/in_task");
 
 
   //recieves the command to interact with the bot brain from task center
@@ -88,7 +88,7 @@ void Task_explore::timer_cb(const ros::TimerEvent &event) {
 	//       Needs Odom
 	//
 	//============================
-	arc_msgs::Task expl_task;
+	arc_msgs::TaskService expl_task;
         this->current_task.call(req);
 	sleep(2);
 	if(req.response.task_type == 0){

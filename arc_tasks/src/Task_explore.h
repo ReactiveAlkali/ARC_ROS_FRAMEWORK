@@ -1,7 +1,7 @@
 
 #include "ros/ros.h"
 #include <ros/ros.h>
-#include "arc_msgs/Task.h"
+#include "arc_msgs/TaskService.h"
 #include "std_srvs/SetBool.h"
 
 #ifndef ARC_TASKS_TASK_EXPLORE_H

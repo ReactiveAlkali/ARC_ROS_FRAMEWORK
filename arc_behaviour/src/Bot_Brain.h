@@ -6,7 +6,7 @@
 #include "ros/ros.h"
 #include "std_srvs/SetBool.h"
 #include "arc_msgs/QuerryTask.h"
-#include "arc_msgs/Task.h"
+#include "arc_msgs/TaskService.h"
 #include "arc_msgs/ToggleList.h"
 
 

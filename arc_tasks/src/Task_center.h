@@ -11,7 +11,7 @@
 #include "ros/ros.h"
 #include "std_srvs/SetBool.h"
 #include "arc_msgs/QuerryTask.h"
-#include "arc_msgs/Task.h"
+#include "arc_msgs/TaskService.h"
 #ifndef ARC_TASKS_TASKCENTER_H
 #define ARC_TASKS_TASKCENTER_H
 
@@ -76,7 +76,7 @@ class Task_center {
   
   bool curr_task_cb(arc_msgs::QuerryTask::Request &req, arc_msgs::QuerryTask::Response &res);
 
-  bool in_task_cb(arc_msgs::Task::Request &req, arc_msgs::Task::Response &res);
+  bool in_task_cb(arc_msgs::TaskService::Request &req, arc_msgs::TaskService::Response &res);
 
 };
  

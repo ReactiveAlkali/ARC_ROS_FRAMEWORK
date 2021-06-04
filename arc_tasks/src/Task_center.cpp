@@ -2,7 +2,7 @@
 #include "std_msgs/Bool.h"
 #include "Task_center.h"
 #include "arc_msgs/QuerryTask.h"
-#include "arc_msgs/Task.h"
+#include "arc_msgs/TaskService.h"
 #include <ros/ros.h>
 
 
@@ -180,7 +180,7 @@ void Task_center::timer_cb(const ros::TimerEvent &event) {
 
 
 //Is giving the task center node a task to add to the queue
-bool Task_center::in_task_cb(arc_msgs::Task::Request &req, arc_msgs::Task::Response &res){
+bool Task_center::in_task_cb(arc_msgs::TaskService::Request &req, arc_msgs::TaskService::Response &res){
 
   Task build_task = {.task_type = req.task_type, .priority = req.priority};
   task_queue.push(build_task);

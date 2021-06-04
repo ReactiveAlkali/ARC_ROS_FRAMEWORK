@@ -72,7 +72,7 @@ add_service_files(
    DropMarker.srv
    QuerryRole.srv
    QuerryTask.srv
-   TaskService.srv
+   Task.srv
    ToggleList.srv
 )
 
