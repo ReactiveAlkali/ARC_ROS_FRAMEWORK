@@ -8,7 +8,7 @@ The launch file for a single maxbot.
   
     <!-- BEHAVIOUR FOR ROBOT-->
     <node name="arc_base" pkg="arc_behaviour" type="arc_base">
-	<rosparam param="schemas">["random_wander_ms","clean_debris_ms", "bot_brain, move_to_goal_ms"]</rosparam>
+	<rosparam param="schemas">["random_wander_ms","clean_debris_ms", "bot_brain", "move_to_goal_ms"]</rosparam>
     </node>
 
     <node name="bot_brain" pkg="arc_behaviour" type="bot_brain" output="screen"/>
