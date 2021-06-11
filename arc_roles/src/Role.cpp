@@ -42,8 +42,9 @@ void Role::set_priority(float new_priority){
   this->priority = new_priority;
 }
 
-void Role::set_max_count(int new_max_count){
-  this->priority = new_max_count;
+void Role::set_max_count(int new_max_count)
+{
+  this->max_count = new_max_count;
 }
 
 void Role::set_local_handle(std::string local_name){
@@ -56,22 +57,28 @@ void Role::set_local_handle(std::string local_name){
 
 //==========================================
 //
-//
+// Declaration of robots with this role
 //
 //==========================================
 
-bool Role::declare_role_cb(std_srvs::SetBoolRequest &req, std_srvs::SetBoolResponse &res){
+bool Role::declare_role_cb(std_srvs::SetBoolRequest &req, std_srvs::SetBoolResponse &res)
+{
   this->handle_declare(req.data);
   return true;
 }
 
-void Role::handle_declare(bool in_indeclare){
-  
+void Role::handle_declare(bool in_indeclare)
+{
+  if (in_indeclare) {
+    this->curr_count++;
+  } else {
+    this->curr_count--;
+  }  
 }
 
 //==========================================
 //
-//
+// Querry the suitability of the robot for this role
 //
 //==========================================
 
