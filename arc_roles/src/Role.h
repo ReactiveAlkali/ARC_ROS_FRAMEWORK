@@ -14,6 +14,7 @@ namespace arc_roles{
   private:
     float priority;
     int max_count;
+    int min_count;
     int curr_count;
     /*
     std::struct role_matrix{
@@ -62,6 +63,13 @@ namespace arc_roles{
 	void set_priority(float new_priority);
 
 	void set_max_count(int new_max_count);
+	
+	/**
+	* Sets the minimum amount of robots wanted for a role
+	*
+	* @param new_min_count The new desired minimum robot count
+	*/
+	void set_min_count(int new_min_count);
 
 	void set_local_handle(std::string local_name);
     

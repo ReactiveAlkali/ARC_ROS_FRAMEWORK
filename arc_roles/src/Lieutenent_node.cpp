@@ -6,7 +6,8 @@ int main(int argc, char **argv){
   arc_roles::Role lieutenent("LIEUTENENT");
 
   lieutenent.set_priority(1.0);
-  lieutenent.set_max_count(1);
+  lieutenent.set_max_count(3);
+  lieutenent.set_min_count(1);
 
   lieutenent.run();
   return 0;

@@ -6,7 +6,8 @@ int main(int argc, char **argv){
   arc_roles::Role officer("OFFICER");
 
   officer.set_priority(0.1);
-  officer.set_max_count(1);
+  officer.set_max_count(10);
+  officer.set_min_count(3);
 
   officer.run();
   return 0;

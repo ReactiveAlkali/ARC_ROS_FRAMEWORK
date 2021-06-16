@@ -38,7 +38,8 @@ void Role::run(){
   }
 }
 
-void Role::set_priority(float new_priority){
+void Role::set_priority(float new_priority)
+{
   this->priority = new_priority;
 }
 
@@ -47,11 +48,16 @@ void Role::set_max_count(int new_max_count)
   this->max_count = new_max_count;
 }
 
-void Role::set_local_handle(std::string local_name){
+void Role::set_min_count(int new_min_count)
+{
+  this->min_count = new_min_count;
+}
+
+void Role::set_local_handle(std::string local_name)
+{
   ROS_INFO("Setting a new Local Handle");
   ros::NodeHandle new_local_handle(local_name);
   this->local_handle = new_local_handle;
-
 }
 
 
@@ -82,11 +88,33 @@ void Role::handle_declare(bool in_indeclare)
 //
 //==========================================
 
-bool Role::querry_role_cb(arc_msgs::QuerryRole::Request &req, arc_msgs::QuerryRole::Response &res){
+bool Role::querry_role_cb(arc_msgs::QuerryRole::Request &req, arc_msgs::QuerryRole::Response &res)
+{
   res.app = this->handle_querry(req.bot_type);
   return true;
 }
 
-float Role::handle_querry(int in_bot_type){
-  return 0.2;
+// TODO Also need to calculate the bot's suitability for the role
+float Role::handle_querry(int in_bot_type)
+{
+  return calc_importance();
+}
+
+float calc_importance()
+{
+  float importance{ 0 };  // The calculated importance
+
+  if (this->curr_count < this->min_count) {
+    importance = this->priority * (this->min_count - this->curr_count) / this->min_count;
+
+  } else if (this->curr_count >= this->min_count && this->curr_count < this->max_count) {
+    importance = 0.5 * this->priority * (this->max_count - this->curr_count - this->min_count)
+      / (this->max_count - this->min_count);
+
+  // Should also check whether another agent with this role has a lower suitability
+  } else if (this->curr_count >= this->max_count) {
+    importance = priority;
+  }
+
+  return importance;
 }
