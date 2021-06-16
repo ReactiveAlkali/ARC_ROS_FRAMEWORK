@@ -100,9 +100,9 @@ float Role::handle_querry(int in_bot_type)
   return calc_importance();
 }
 
-float calc_importance()
+float Role::calc_importance()
 {
-  float importance{ 0 };  // The calculated importance
+  float importance;  // The calculated importance
 
   if (this->curr_count < this->min_count) {
     importance = this->priority * (this->min_count - this->curr_count) / this->min_count;
@@ -113,7 +113,7 @@ float calc_importance()
 
   // Should also check whether another agent with this role has a lower suitability
   } else if (this->curr_count >= this->max_count) {
-    importance = priority;
+    importance = this->priority;
   }
 
   return importance;

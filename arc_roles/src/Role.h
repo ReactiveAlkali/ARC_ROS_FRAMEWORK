@@ -51,6 +51,13 @@ namespace arc_roles{
 
 	void handle_declare(bool in_declare);
 	float handle_querry(int in_bot_type);
+
+	/**
+	* Determines the importance weighting for an agent to fill a role
+	* @return The importance to fill the role
+	*/
+	float calc_importance();
+
   public:
 	
 	Role(std::string local);
