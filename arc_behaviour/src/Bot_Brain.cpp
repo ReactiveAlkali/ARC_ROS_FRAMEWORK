@@ -32,21 +32,21 @@ Bot_Brain::Bot_Brain(){
 
 
 
-//
-//QUERRY FOR EFFICENCY
-//
+  //
+  //QUERRY FOR EFFICENCY
+  //
 
-this->querry_general_client = global_handle.serviceClient<arc_msgs::QuerryRole>("/GENERAL/querry_role");
-this->querry_lieutenent_client = global_handle.serviceClient<arc_msgs::QuerryRole>("/LIEUTENENT/querry_role");
-this->querry_officer_client = global_handle.serviceClient<arc_msgs::QuerryRole>("/OFFICER/querry_role");
+  this->querry_leader_client = global_handle.serviceClient<arc_msgs::QuerryRole>("/LEADER/querry_role");
+  this->querry_verifier_client = global_handle.serviceClient<arc_msgs::QuerryRole>("/VERIFIER/querry_role");
+  this->querry_explorer_client = global_handle.serviceClient<arc_msgs::QuerryRole>("/EXPLORER/querry_role");
 
-//
-// DECLARE NEW ROLE
-//
+  //
+  // DECLARE NEW ROLE
+  //
 
-this->declare_general_client = local_handle.serviceClient<std_srvs::SetBool>("/GENERAL/declare_role");
-this->declare_lieutenent_client = global_handle.serviceClient<std_srvs::SetBool>("/LIEUTENENT/declare_role");
-this->declare_general_client = global_handle.serviceClient<std_srvs::SetBool>("/OFFICER/declare_role");
+  this->declare_leader_client = global_handle.serviceClient<std_srvs::SetBool>("/LEADER/declare_role");
+  this->declare_verifier_client = global_handle.serviceClient<std_srvs::SetBool>("/VERIFIER/declare_role");
+  this->declare_explorer_client = global_handle.serviceClient<std_srvs::SetBool>("/EXPLORER/declare_role");
 
 
 
@@ -117,9 +117,9 @@ void Bot_Brain::setRole(){
 
   //Inatialize all applicability values
 
-  float general_app;
-  float lieutenent_app;
-  float officer_app;
+  float leader_app;
+  float verifier_app;
+  float explorer_app;
   float debris_app;
 
   //
@@ -135,66 +135,66 @@ void Bot_Brain::setRole(){
   disable_srv.request.data = false;
 
   
-  if(querry_general_client.call(querry_role_srv)){
-    ROS_INFO("Querrying The General node");
-    general_app = querry_role_srv.response.app;
-    ROS_INFO("%f", general_app);
+  if(querry_leader_client.call(querry_role_srv)){
+    ROS_INFO("Querrying The Leader node");
+    leader_app = querry_role_srv.response.app;
+    ROS_INFO("%f", leader_app);
 
    } else{
-    ROS_INFO("An Error occured querring the general node aborting role selection");
+    ROS_INFO("An Error occured querring the leader node aborting role selection");
     return;
    }
 
   
-   if(querry_lieutenent_client.call(querry_role_srv)){
-    ROS_INFO("Querrying The Lieutenent node");
-    lieutenent_app = querry_role_srv.response.app;
-    ROS_INFO("%f", lieutenent_app);
+   if(querry_verifier_client.call(querry_role_srv)){
+    ROS_INFO("Querrying The Verifier node");
+    verifier_app = querry_role_srv.response.app;
+    ROS_INFO("%f", verifier_app);
 
    } else{
-    ROS_INFO("An Error occured querring the Lieutenent node aborting role selection");
+    ROS_INFO("An Error occured querring the Verifier node aborting role selection");
     return;
    }
 
    
-    if(querry_officer_client.call(querry_role_srv)){
-    ROS_INFO("Querrying The Officer node");
-    officer_app = querry_role_srv.response.app;
-    ROS_INFO("%f", officer_app);
+    if(querry_explorer_client.call(querry_role_srv)){
+    ROS_INFO("Querrying The Explorer node");
+    explorer_app = querry_role_srv.response.app;
+    ROS_INFO("%f", explorer_app);
    } else{
-    ROS_INFO("An Error occured querring the officer node aborting role selection");
+    ROS_INFO("An Error occured querring the explorer node aborting role selection");
     return;
    }
 
     //
-    //Best as a General
+    //Best as a Leader
     //
-    if(general_app >= lieutenent_app && general_app >= officer_app){
+    if(leader_app >= verifier_app && leader_app >= explorer_app){
 
-      //is currently a General
+      //is currently a Leader
       /* if(this->bot_type ==1){
 	return;
 	//Do nothing because it is already doing its best
       }
 
-      //is currently a lieutenent
+      //is currently a verifier
       if(this->bot_type == 2){
 	
-	 if(declare_lieutenent_client.call(disable_srv)){
-	   ROS_INFO("Undeclaring from the lieutenent node");
+	 if(declare_verifier_client.call(disable_srv)){
+	   ROS_INFO("Undeclaring from the verifier node");
 	 } else{
-	   ROS_INFO("An Error occured undeclaring form lieutenent node aborting role selection");
+	   ROS_INFO("An Error occured undeclaring form verifier node aborting role selection");
 	   return;
 	 }
 
       }
 
-      //is currently an officer
+      //is currently an explorer
       if(this->bot_type == 3){
-	 if(declare_officer_client.call(disable_srv)){
-	   ROS_INFO("Undeclaring from the officer node");
+	 if(declare_explorer_client.call(disable_srv)){
+	   ROS_INFO("Undeclaring from the explorer node");
 	 } else{
-	   ROS_INFO("An Error occured undeclaring form officer node aborting role selection");
+	   ROS_INFO("An Error occured undeclaring form explorer node aborting role selection");
 	   return;
 	 }
 
@@ -207,36 +207,36 @@ void Bot_Brain::setRole(){
 
       */
 
-      this->setGeneralRole();
+      this->setLeaderRole();
       this->bot_type = 1;
       return;
     }
 
 
     //
-    //Best as a lieutenent
+    //Best as a verifier
     //
-     if(lieutenent_app >= general_app && lieutenent_app >= officer_app){
+     if(verifier_app >= leader_app && verifier_app >= explorer_app){
 
-      //is currently a General
+      //is currently a Leader
        /*
       if(this->bot_type ==1){
-	 if(declare_general_client.call(disable_srv)){
-	   ROS_INFO("Undeclaring from the general node");
+	 if(declare_leader_client.call(disable_srv)){
+	   ROS_INFO("Undeclaring from the leader node");
 	 } else{
-	   ROS_INFO("An Error occured undeclaring from general node aborting role selection");
+	   ROS_INFO("An Error occured undeclaring from leader node aborting role selection");
 	   return;
 	 }
 	
       }
 
-      //is currently a lieutenent
+      //is currently a verifier
       if(this->bot_type == 2){
 	return;
 	//do nothing cause everything already G
       }
 
-      //is currently an officer
+      //is currently an explorer
       if(this->bot_type == 3){
 
       }
@@ -247,29 +247,29 @@ void Bot_Brain::setRole(){
       }
        */
 
-      this->setLieutenentRole();
+      this->setVerifierRole();
       this->bot_type = 2;
       return;
     }
 
 
      //
-     //Best as an officer
+     //Best as an explorer
      //
-      if(officer_app >= lieutenent_app && officer_app >= general_app){
+      if(explorer_app >= verifier_app && explorer_app >= leader_app){
 
-      //is currently a General
+      //is currently a Leader
 	/*
       if(this->bot_type ==1){
 	
       }
 
-      //is currently a lieutenent
+      //is currently a verifier
       if(this->bot_type == 2){
 
       }
 
-      //is currently an officer
+      //is currently an explorer
       if(this->bot_type == 3){
 	return;
 	//do nothing as has best job in whole world
@@ -282,7 +282,7 @@ void Bot_Brain::setRole(){
       }
 
 	*/
-      this->setOfficerRole();
+      this->setExplorerRole();
       this->bot_type = 3;
       return;
     }
@@ -292,20 +292,20 @@ void Bot_Brain::setRole(){
       //
 
       /*
-       if(general_app >= lieutenent_app && general_app >= officer_app){
+       if(leader_app >= verifier_app && leader_app >= explorer_app){
 
-      //is currently a General
+      //is currently a Leader
       if(this->bot_type ==1){
 	return;
 	//Do
       }
 
-      //is currently a lieutenent
+      //is currently a verifier
       if(this->bot_type == 2){
 
       }
 
-      //is currently an officer
+      //is currently an explorer
       if(this->bot_type == 3){
 
       }
@@ -315,75 +315,75 @@ void Bot_Brain::setRole(){
 
       }
 
-      this->setGeneralRole();
+      this->setLeaderRole();
     }
       */ //TODO implement debris
   
   
 }
 
-void Bot_Brain::setGeneralRole(){
+void Bot_Brain::setLeaderRole(){
   std_srvs::SetBool enable_srv;
   std_srvs::SetBool disable_srv;
   enable_srv.request.data = true;
   disable_srv.request.data = false;
     if(toggle_random_wander_client.call(enable_srv)){
-    ROS_INFO("General Role setting wander to true");
+    ROS_INFO("Leader Role setting wander to true");
    } else{
-    ROS_INFO("General Role error setting wander to true");
+    ROS_INFO("Leader Role error setting wander to true");
    }
 
     if(toggle_clean_debris_client.call(disable_srv)){
-    ROS_INFO("General Role setting clean debris to false");
+    ROS_INFO("Leader Role setting clean debris to false");
    } else{
-    ROS_INFO("General Role error setting clean debris to false");
+    ROS_INFO("Leader Role error setting clean debris to false");
    }
 
      if(toggle_handle_marker_client.call(disable_srv)){
-    ROS_INFO("General Role setting handle marker to false");
+    ROS_INFO("Leader Role setting handle marker to false");
    } else{
-    ROS_INFO("General Role error setting handle marker to false");
+    ROS_INFO("Leader Role error setting handle marker to false");
    }
 
 
     if(toggle_move_to_goal_client.call(enable_srv)){
-    ROS_INFO("General Role setting move to goal to true");
+    ROS_INFO("Leader Role setting move to goal to true");
    } else{
-    ROS_INFO("General Role error setting move to goal to true");
+    ROS_INFO("Leader Role error setting move to goal to true");
    }
 
     
 }
 
 //TODO done
-void Bot_Brain::setLieutenentRole(){
+void Bot_Brain::setVerifierRole(){
   std_srvs::SetBool enable_srv;
   std_srvs::SetBool disable_srv;
   enable_srv.request.data = true;
   disable_srv.request.data = false;
     if(toggle_random_wander_client.call(enable_srv)){
-    ROS_INFO("Lieutenent Role setting wander to true");
+    ROS_INFO("Verifier Role setting wander to true");
    } else{
-    ROS_INFO("Lieutenent Role error setting wander to true");
+    ROS_INFO("Verifier Role error setting wander to true");
    }
 
     if(toggle_clean_debris_client.call(disable_srv)){
-    ROS_INFO("Lieutenent Role setting clean debris to false");
+    ROS_INFO("Verifier Role setting clean debris to false");
    } else{
-    ROS_INFO("Lieutenent Role error setting clean debris to false");
+    ROS_INFO("Verifier Role error setting clean debris to false");
    }
 
      if(toggle_handle_marker_client.call(enable_srv)){
-    ROS_INFO("Lieutenent Role setting handle marker to true");
+    ROS_INFO("Verifier Role setting handle marker to true");
    } else{
-    ROS_INFO("Lieutenent Role error setting handle marker to true");
+    ROS_INFO("Verifier Role error setting handle marker to true");
    }
 
 
     if(toggle_move_to_goal_client.call(enable_srv)){
-    ROS_INFO("Lieutenent Role setting move to goal to true");
+    ROS_INFO("Verifier Role setting move to goal to true");
    } else{
-    ROS_INFO("Lieutenent Role error setting move to goal to true");
+    ROS_INFO("Verifier Role error setting move to goal to true");
    }
 
     
@@ -391,34 +391,34 @@ void Bot_Brain::setLieutenentRole(){
 
 
 //TODO done
-void Bot_Brain::setOfficerRole(){
+void Bot_Brain::setExplorerRole(){
   std_srvs::SetBool enable_srv;
   std_srvs::SetBool disable_srv;
   enable_srv.request.data = true;
   disable_srv.request.data = false;
     if(toggle_random_wander_client.call(enable_srv)){
-    ROS_INFO("Officer Role setting wander to true");
+    ROS_INFO("Explorer Role setting wander to true");
    } else{
-    ROS_INFO("Officer Role error setting wander to true");
+    ROS_INFO("Explorer Role error setting wander to true");
    }
 
     if(toggle_clean_debris_client.call(disable_srv)){
-    ROS_INFO("Officer Role setting clean debris to false");
+    ROS_INFO("Explorer Role setting clean debris to false");
    } else{
-    ROS_INFO("Officer Role error setting clean debris to false");
+    ROS_INFO("Explorer Role error setting clean debris to false");
    }
 
      if(toggle_handle_marker_client.call(disable_srv)){
-    ROS_INFO("Officer Role setting handle marker to false");
+    ROS_INFO("Explorer Role setting handle marker to false");
    } else{
-    ROS_INFO("Officer Role error setting handle marker to false");
+    ROS_INFO("Explorer Role error setting handle marker to false");
    }
 
 
     if(toggle_move_to_goal_client.call(disable_srv)){
-    ROS_INFO("Officer Role setting move to goal to false");
+    ROS_INFO("Explorer Role setting move to goal to false");
    } else{
-    ROS_INFO("Officer Role error setting move to goal to false");
+    ROS_INFO("Explorer Role error setting move to goal to false");
    }
 
     

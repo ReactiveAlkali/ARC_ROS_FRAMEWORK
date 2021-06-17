@@ -17,9 +17,9 @@ See how long it can run.
     <param name="frame_id" value="/map" />
   </node> 
 
-   <node name="general_role" pkg="arc_roles" type="general_role" output="screen"/>
-   <node name="lieutenent_role" pkg="arc_roles" type="lieutenent_role" output="screen"/>
-   <node name="officer_role" pkg="arc_roles" type="officer_role" output="screen"/>
+   <node name="leader_role" pkg="arc_roles" type="leader_role" output="screen"/>
+   <node name="lieutenent_role" pkg="arc_roles" type="verifier_role" output="screen"/>
+   <node name="explorer_role" pkg="arc_roles" type="explorer_role" output="screen"/>
 
 
 <group ns="arc">

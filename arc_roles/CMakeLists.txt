@@ -205,23 +205,23 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-add_executable(general_role src/Role.cpp src/Role.h src/General_node.cpp)
-add_executable(lieutenent_role src/Role.cpp src/Role.h src/Lieutenent_node.cpp)
-add_executable(officer_role src/Role.cpp src/Role.h src/Officer_node.cpp)
+add_executable(leader_role src/Role.cpp src/Role.h src/Leader_node.cpp)
+add_executable(verifier_role src/Role.cpp src/Role.h src/Verifier_node.cpp)
+add_executable(explorer_role src/Role.cpp src/Role.h src/Explorer_node.cpp)
 
 
 
 
-target_link_libraries(general_role ${catkin_LIBRARIES})
-target_link_libraries(lieutenent_role ${catkin_LIBRARIES})
-target_link_libraries(officer_role ${catkin_LIBRARIES})
+target_link_libraries(leader_role ${catkin_LIBRARIES})
+target_link_libraries(verifier_role ${catkin_LIBRARIES})
+target_link_libraries(explorer_role ${catkin_LIBRARIES})
 
 
 
 
-add_dependencies(general_role marker_msgs_generate_messages_cpp arc_msgs_generate_messages_cpp)
-add_dependencies(lieutenent_role marker_msgs_generate_messages_cpp arc_msgs_generate_messages_cpp)
-add_dependencies(officer_role marker_msgs_generate_messages_cpp arc_msgs_generate_messages_cpp)
+add_dependencies(leader_role marker_msgs_generate_messages_cpp arc_msgs_generate_messages_cpp)
+add_dependencies(verifier_role marker_msgs_generate_messages_cpp arc_msgs_generate_messages_cpp)
+add_dependencies(explorer_role marker_msgs_generate_messages_cpp arc_msgs_generate_messages_cpp)
 
 
 

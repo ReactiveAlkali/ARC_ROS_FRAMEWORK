@@ -59,14 +59,14 @@ namespace arc_behaviour{
     //
     //=================================
 
-    //client to querry for a general role
-    ros::ServiceClient querry_general_client;
+    //client to querry for a leader role
+    ros::ServiceClient querry_leader_client;
 
-    //client to querry for a lieutenent role
-    ros::ServiceClient querry_lieutenent_client;
+    //client to querry for a verifier role
+    ros::ServiceClient querry_verifier_client;
 
-    //client to querry for an officer role
-    ros::ServiceClient querry_officer_client;
+    //client to querry for an explorer role
+    ros::ServiceClient querry_explorer_client;
 
 
     //====================================
@@ -75,27 +75,27 @@ namespace arc_behaviour{
     //
     //====================================
    
-    //client to declare the bot a general role
-    ros::ServiceClient declare_general_client;
+    //client to declare the bot a leader role
+    ros::ServiceClient declare_leader_client;
 
-    //client to declare the bot a lieutenent
-    ros::ServiceClient declare_lieutenent_client;
+    //client to declare the bot a verifier
+    ros::ServiceClient declare_verifier_client;
 
-    //client to declare the bot an officer
-    ros::ServiceClient declare_officer_cient;
+    //client to declare the bot an explorer
+    ros::ServiceClient declare_explorer_client;
 
 
-    bool general_role;
+    bool leader_role;
     
     void toggle(bool state);
 
     void setRole();
 
-    void setGeneralRole();
+    void setLeaderRole();
 
-    void setLieutenentRole();
+    void setVerifierRole();
 
-    void setOfficerRole();
+    void setExplorerRole();
 
     void newJob();
 
